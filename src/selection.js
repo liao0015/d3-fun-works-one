@@ -63,7 +63,7 @@ export function testDataJoining(){
         .style('background-color', 'teal')
         .style('margin', '10px');
 
-    console.log(_divM);//_divM is the merged new selection
+    //console.log(_divM);//_divM is the merged new selection
 
     //_divs.exit().remove();//remove divs without data
     _divs.exit() //show the removed div
@@ -73,10 +73,10 @@ export function testDataJoining(){
         .style('margin', '10px')
         .text('No data');
     
-    console.log(divs);
-    console.log(_divs);
-    console.log(_divs.enter());
-    console.log(_divs.exit());
+    //console.log(divs);
+    //console.log(_divs);
+    //console.log(_divs.enter());
+    //console.log(_divs.exit());
 }
 
 

@@ -35,36 +35,45 @@ function generateCircles(){
         };
     });
 
-    let circles = svg.append('g')
-        .attr('class', 'circles')
-        .selectAll('circle')
-            .data(circle_data)
-            .enter()
-            .append("circle")
-            .attr('class', function(d){
-                if(d.x > 200){
-                    if(d.y > 200){
-                        return 'bottom-right';
-                    }else{
-                        return 'top-right';
-                    }
+    let g = svg.append('g')
+        .attr('class', 'circles');
+        
+    g.selectAll('circle')
+        .data(circle_data)
+        .enter().append("circle")
+        .attr('class', function(d){
+            if(d.x > 200){
+                if(d.y > 200){
+                    return 'bottom-right';
                 }else{
-                    if(d.y > 200){
-                        return 'bottom-left';
-                    }else{
-                        return 'top-left';
-                    }
+                    return 'top-right';
                 }
-            })
-            .attr('cx', function(d){return d.x;})
-            .attr('cy', function(d){return d.y;})
-            .attr('r', radius)
-            .attr('fill', 'lightblue');
+            }else{
+                if(d.y > 200){
+                    return 'bottom-left';
+                }else{
+                    return 'top-left';
+                }
+            }
+        })
+        .attr('cx', function(d){return d.x;})
+        .attr('cy', function(d){return d.y;})
+        .attr('r', radius)
+        .attr('fill', 'lightblue')
+        .call(d3.drag().on('drag', dragged));
 
     svg.selectAll('.top-left').attr('fill', '#7B1FA2');
     svg.selectAll('.bottom-left').attr('fill', '#AFB42B');
     svg.selectAll('.top-right').attr('fill', '#00796B');
     svg.selectAll('.bottom-right').attr('fill', '#F57C00');
+
+    svg.call(d3.zoom()
+        .scaleExtent([1 / 2, 8])
+        .on("zoom", zoomed));
+    //apply zoom transoformation on g<--important
+    function zoomed() {
+        g.attr("transform", d3.event.transform);
+    }
 }
 
 function customZoom(container, scale){
@@ -88,6 +97,11 @@ function customZoom(container, scale){
     //     container.select('g').attr('transform', `translate(${width*scale}, ${height*scale}) scale(${scale}) translate(-${width*scale}, -${height*scale})`);
     // }
     
+}
+
+
+function dragged(d){
+    d3.select(this).attr('cx', d.x = d3.event.x).attr('cy', d.y = d3.event.y);
 }
 
 function scaleWithViewbox(container, scale, view){
@@ -120,7 +134,6 @@ function scaleWithViewbox(container, scale, view){
 export function generateMenu(scale, dropdown_item_value){
     //menu
     let menu = d3.select('#zoom1').append('div').attr('id', 'zoom1-menu');
-    menu.selectAll('*').remove();
     menu.style('width', '250px')
         .style('height', '300px')
         .style('border', '2px solid black')

@@ -15,7 +15,7 @@ export function calculateDataOffset(data){
     if(data.length > 0){
         //array
         if(data[0].length != null && data[0].length > 0){
-            console.log('two dimensional array');
+            //console.log('two dimensional array');
             yOffset = d3.max(data.map(function(value, i){
                 return value[1];
             })) + 20;
@@ -38,7 +38,7 @@ export function calculateDataOffset(data){
 export function drawScatteredPlot(svgContainer, data){
     let offsets = calculateDataOffset(data);
     let circle = svgContainer.selectAll('circle').data(data);//update&data bind
-    console.log(circle);
+    //console.log(circle);
     circle.exit().remove();//exit&remove
     circle.enter().append('circle')
         .attr('fill', function(d){return "hsl(" + Math.random() * 360 + ",50%,50%)";})
@@ -136,10 +136,10 @@ export function drawSmoothPath(container, data){
 
     //generate path using processed data
     const d = _data.reduce(function(acc, point, i , a){
-        console.log(acc);
-        console.log(point);
-        console.log(i);
-        console.log(a);
+        //console.log(acc);
+        //console.log(point);
+        //console.log(i);
+        //console.log(a);
         let _point = point.slice();
         // _point[0] = point[0] + 10;
         // _point[1] = 100 - point[1];
@@ -167,10 +167,10 @@ export function drawJaggedPath(container, data){
 
     //generate path using processed data
     const d = _data.reduce(function(acc, point, i , a){
-        console.log(acc);
-        console.log(point);
-        console.log(i);
-        console.log(a);
+        //console.log(acc);
+        //console.log(point);
+        //console.log(i);
+        //console.log(a);
         let _point = point.slice();
         // _point[0] = point[0] + 10;
         // _point[1] = 100 - point[1];
