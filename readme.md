@@ -5,6 +5,7 @@ introduction: Three small fun projects were built to study D3 & SVG.  Many of th
 - selection,enter&exit
 - zoom using scale, translate & viewbox
 - smooth path using svg's native cubic curve features
+- zoom and drag using d3
 
 installation & environment:
 
